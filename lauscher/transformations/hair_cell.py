@@ -13,11 +13,11 @@ class HairCell(Transformation):
     # Model parameters have well-defined short names
     # pylint: disable=invalid-name
     def __init__(self,
-                 y: float = 5.05,
-                 g: float = 2000.0,
-                 l: float = 2500.0,
-                 r: float = 6580.0,
-                 x: float = 66.3,
+                 y: float = 11.11,
+                 g: float = 1000.0,
+                 l: float = 1250.0,
+                 r: float = 16667.0,
+                 x: float = 250.0,
                  a: float = 5.0,
                  b: float = 300.0,
                  h: float = 50000.0,

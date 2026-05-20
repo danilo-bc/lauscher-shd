@@ -14,7 +14,7 @@ class Wave2Spike(Transformation):
         # noinspection PyTypeChecker
         return wave \
             .transform(RmsNormalizer(0.3)) \
-            .transform(HanningWindow()) \
+            .transform(HanningWindow(rampup_time=30e-3, rampdown_time=30e-3)) \
             .transform(BasilarMembrane(channels=self.num_channels)) \
             .transform(HairCell()) \
             .transform(BushyCell())

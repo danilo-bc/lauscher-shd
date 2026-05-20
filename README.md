@@ -1,6 +1,18 @@
-<p align="center">
-  <img src=".artwork/logo.png" width="80%" alt="LAUSCHER Logo"/>
-</p>
+# About this fork
+
+This fork is a personal repository focused on reproducing the creation of the Spiking Heidelberg Digits dataset by changing the default parameters of the tool to match the ones cited in the article as closely as possible.
+
+Logo removed from this README to readily differentiate this repository from the [original](https://github.com/electronicvisions/lauscher).
+
+### Changes from original:
+
+#### lauscher/transformations/hair_cell.py
+
+Most default parameters modified to match article.
+
+#### lauscher/transformations/wave2spike.py
+
+Hanning window transformation has 30 ms of rampup and rampdown time by default.
 
 # LAUSCHER – Flexible Auditory Spike Conversion Chain
 
