@@ -6,6 +6,10 @@ Logo removed from this README to readily differentiate this repository from the 
 
 ### Changes from original:
 
+#### `__main__.py`
+
+Support for folder processing.
+
 #### lauscher/transformations/hair_cell.py
 
 Most default parameters modified to match article.
@@ -50,6 +54,12 @@ python -m lauscher test/resources/spoken_digit.flac my_first_spiketrain.npz --nu
 ```
 Note that due to the complexity of the implemented model, even short audio files might take multiple minutes to convert.
 Memory consumption might be huge for long audio files.
+
+It's possible to pass a folder instead of an individual file. The script will scan for `.flac` files and output processed `.npz` files with the same file name as the input ones, but in the provided output folder. For example:
+
+```shell
+python -m lauscher ./test/resources ./generated_spikes --num_channels 70 --verbose
+```
 
 ## License
 ```
