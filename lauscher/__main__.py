@@ -17,7 +17,7 @@ from lauscher.transformations.wave2spike import Wave2Spike
 def main(input_name: str,
          output_name: str,
          num_channels: int,
-         rng_seed: int | None):
+         rng_seed: int | None = None):
     if rng_seed == None:
         global_rng = np.random.default_rng()
     else:
