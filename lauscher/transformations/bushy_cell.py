@@ -16,6 +16,7 @@ class BushyCell(Transformation):
     # pylint: disable=invalid-name
 
     def __init__(self,
+                 rng,
                  n_convergence: int = 40,
                  tau_mem: float = 1e-3,
                  tau_syn: float = 5e-4,
@@ -25,6 +26,7 @@ class BushyCell(Transformation):
         # pylint: disable=too-many-arguments
 
         super().__init__()
+        self.rng = rng
         self.n_convergence = n_convergence
         self.tau_mem = tau_mem
         self.tau_syn = tau_syn
@@ -44,9 +46,8 @@ class BushyCell(Transformation):
                         last = j
         return spikes
 
-    def _sample(self, stimulus, fs):
-        spikes = np.random.rand(stimulus.size,
-                                self.n_convergence) < stimulus[:, None]
+    def _sample(self, stimulus, fs, rng):
+        spikes = rng.random((stimulus.size, self.n_convergence)) < stimulus[:, None]
         return self._correct(spikes, self.tau_refrac * fs)
 
     def _lif(self, stimuli, fs):
@@ -85,7 +86,7 @@ class BushyCell(Transformation):
         stimuli = np.ndarray((data.num_channels, data.num_samples,
                               self.n_convergence))
         for i in range(data.num_channels):
-            stimuli[i] = self._sample(data.channels[i], data.sample_rate)
+            stimuli[i] = self._sample(data.channels[i], data.sample_rate, self.rng)
 
         with Pool(CommandLineArguments().num_concurrent_jobs) as workers:
             spike_matrix = workers.map(partial(self._lif, fs=data.sample_rate),
